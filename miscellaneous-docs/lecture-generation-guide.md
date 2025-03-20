@@ -9,81 +9,175 @@ This document outlines the process for generating high-quality, comprehensive le
    - Request a detailed, educational lecture format with both high-level concepts and specific examples
    - Mention that you'll need markdown files for each lesson that you can save
 
-2. **Module Structure**: Provide Claude with the module overview and lesson list first, then proceed lesson by lesson
+2. **Module Structure**: 
+   - Provide Claude with the module overview and lesson list first
+   - Ensure the README.md follows the standard format:
+     ```markdown
+     ### Lesson X.Y: Title
+     - [Lesson Plan](./x.y-title.md)
+     - [Detailed Lecture Notes](./lectures/lesson-x-y.md)
+     - Key learning point 1
+     - Key learning point 2
+     - Key learning point 3
+     ```
+   - Maintain consistent directory structure:
+     ```
+     module-x/
+     ├── README.md
+     ├── x.y-title.md (lesson plans)
+     └── lectures/
+         └── lesson-x-y.md (detailed lectures)
+     ```
 
-3. **Lecture Style Format**: For each lesson, request content that includes:
+3. **Lecture Style Format**: For each lesson, include:
    - Clear section headers with hierarchical structure
    - In-depth explanations of concepts
    - Real-world examples and case studies
-   - Technical details where appropriate
+   - Technical details with implementation code
    - Diagrams described in text (Claude can create mermaid diagrams too)
    - Best practices and common pitfalls
    - Practical considerations for implementation
 
-4. **Format Consistency**: Ask Claude to maintain consistent formatting across all lessons, including:
+4. **Format Consistency**: Maintain consistent formatting across all lessons:
    - Standard header hierarchy (# for title, ## for main sections, ### for subsections)
    - Consistent treatment of technical terms
    - Similar depth of coverage for equivalent topics
    - Comparable length for similar lessons
+   - Standard sections across lectures:
+     ```markdown
+     # Lesson X.Y: Title
+     
+     ## Navigation
+     - [← Back to Module Overview]
+     - [← Previous Lesson]
+     - [Next Lesson →]
+     
+     ## Overview
+     
+     ## Learning Objectives
+     
+     ## Main Content Sections
+     
+     ## Best Practices
+     
+     ## Common Pitfalls
+     
+     ## Additional Resources
+     
+     ## Next Steps
+     ```
 
-5. **Handling Long Content**: For comprehensive lessons, you may need to:
-   - Ask Claude to break the response into parts if it hits length limits
-   - Request continuation of specific sections if they're cut off
-   - Save each part as you receive it to avoid losing content
+5. **Implementation Details**:
+   - Include practical code examples with type hints
+   - Provide error handling patterns
+   - Add logging and monitoring considerations
+   - Include performance optimization tips
+   - Document testing strategies
+
+6. **Cross-Module Consistency**:
+   - Reference related concepts from other modules
+   - Maintain consistent terminology across modules
+   - Ensure progressive complexity through the curriculum
+   - Link to prerequisites when introducing advanced topics
+
+7. **Quality Assurance Process**:
+   - Compare with existing lectures for consistency
+   - Verify all code examples are complete and runnable
+   - Ensure proper error handling in code samples
+   - Check for modern best practices and patterns
+   - Validate links to other modules and resources
 
 ## Example Prompts
 
 ### Initial Module Setup
 
 ```
-I'd like to work through Module X: [Module Title] from the Data Engineering curriculum. Could you create comprehensive lecture notes for each lesson in this module? I want detailed, educational content that I can save as markdown files. Please start with an overview of the module and then we'll go through each lesson.
+I'd like to work through Module X: [Module Title]. Please help me create comprehensive lecture notes following our standard format. Let's start by updating the README.md to match our module structure, then we'll create detailed lectures for each lesson.
 ```
 
 ### For Each Lesson
 
 ```
-Please create a detailed, lecture-style markdown file for Lesson X.Y: [Lesson Title]. I'd like comprehensive coverage that includes:
+Please create a detailed lecture document for Lesson X.Y: [Title]. Please follow our standard format with:
 
-1. Clear explanation of core concepts
-2. Technical details and implementation considerations
-3. Real-world examples and case studies
+1. Navigation links
+2. Clear learning objectives
+3. Comprehensive content with implementation details
 4. Best practices and common pitfalls
-5. Diagrams or visual explanations where appropriate
-
-Please format this as a complete educational lecture that would be suitable for a professional training course.
+5. Code examples with proper error handling
+6. Links to related concepts in other modules
 ```
 
-### For Content Continuation
+### For Content Verification
 
 ```
-The previous lesson content was cut off at "[last visible text]". Could you please continue from that point to complete the lecture?
+Could you please verify that this lecture maintains consistency with our other modules? Specifically check:
+1. Implementation depth matches similar topics
+2. Code examples follow our standards
+3. Error handling patterns are consistent
+4. Best practices are up-to-date
 ```
 
-### For Creating Markdown Files
+## Best Practices for Code Examples
 
-```
-Could you please generate a markdown file for this lesson that I can save? Please use proper markdown formatting with header hierarchies and code blocks where appropriate.
-```
+1. **Standard Implementation Pattern**:
+   ```python
+   from typing import Dict, List, Any
+   import logging
+   
+   class ComponentName:
+       """Implements specific pattern or functionality"""
+       def __init__(self, config: Dict[str, Any]):
+           self.logger = logging.getLogger(__name__)
+           # Initialize with proper error handling
+           
+       def main_method(self) -> None:
+           """Main functionality with proper documentation"""
+           try:
+               # Implementation
+           except Exception as e:
+               self.logger.error(f"Error in main_method: {str(e)}")
+               raise
+   ```
 
-## Saving the Content
+2. **Error Handling Pattern**:
+   - Always include try-except blocks
+   - Log errors appropriately
+   - Use custom exceptions when needed
+   - Include recovery mechanisms
 
-1. After Claude generates each lesson, save it immediately as a markdown file with a consistent naming convention:
-   - `module-X-lesson-Y-title.md`
-
-2. If the content is split across multiple responses, combine them in your markdown editor before saving.
-
-3. Review the final document for any formatting issues or content that was cut off.
+3. **Testing Considerations**:
+   - Include example test cases
+   - Show mocking patterns
+   - Demonstrate error scenario testing
 
 ## Quality Checklist
 
-Before finalizing each lesson, check that it includes:
+Before finalizing each lesson, verify:
 
-- [ ] Clear structure with proper heading hierarchy
-- [ ] Comprehensive coverage of all key topics
-- [ ] Specific examples or case studies
-- [ ] Technical details where appropriate
-- [ ] Best practices and implementation guidelines
-- [ ] Consistent formatting with other lessons
-- [ ] Complete content (no cut-off sections)
+- [ ] Matches standard format and structure
+- [ ] Contains complete, runnable code examples
+- [ ] Includes proper error handling
+- [ ] References related modules appropriately
+- [ ] Maintains consistent terminology
+- [ ] Provides up-to-date best practices
+- [ ] Includes practical implementation tips
+- [ ] Contains appropriate level of detail
+- [ ] Links to additional resources
+- [ ] Follows progressive complexity
 
-By following these guidelines, you can efficiently generate high-quality, comprehensive lecture content for the entire Data Engineering curriculum.
+## Maintenance and Updates
+
+1. Regularly review and update:
+   - Best practices and patterns
+   - Code examples and implementations
+   - External resources and links
+   - Technology versions and compatibility
+
+2. Keep track of:
+   - Student feedback and questions
+   - Common implementation issues
+   - Areas needing more detail
+   - New industry developments
+
+By following these guidelines, you can efficiently generate high-quality, comprehensive lecture content that maintains consistency across the entire Data Engineering curriculum.
